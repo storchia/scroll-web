@@ -19,10 +19,14 @@ export default function AnimationSection() {
     const context = canvas.getContext("2d");
     if (!context) return;
 
-    const frameCount = 253;
+    const isMobile = window.innerWidth < 768;
+    const frameCount = isMobile ? 253 : 253;
+
+    const framesFolder = isMobile ? "frames-mobile" : "frames-desktop";
+    const frameExtension = isMobile ? "webp" : "jpg";
 
     const currentFrame = (index: number) =>
-      `/frames/GV-Aloe-Toma1-V001_${String(index).padStart(5, "0")}.jpg`;
+      `/${framesFolder}/GV-Aloe-Toma1-V001_${String(index).padStart(5, "0")}.${frameExtension}`;
 
     const images: HTMLImageElement[] = [];
     const imageSeq = { frame: 0 };
@@ -83,7 +87,7 @@ export default function AnimationSection() {
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: "+=3000",
+        end: isMobile ? "+=2200" : "+=3000",
         scrub: true,
         pin: true,
         pinSpacing: true,

@@ -1,4 +1,10 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 export default function BenefitsSection() {
+  const [isMobile, setIsMobile] = useState(false);
+
   const benefits = [
     "Más comodidad en cada uso",
     "Suavidad pensada para tu piel",
@@ -7,25 +13,32 @@ export default function BenefitsSection() {
     "Más confianza para sentirte bien en tu propia piel",
   ];
 
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <section
       style={{
         background: "#15bed3",
-        padding: "120px 0", // 👈 full width background
+        padding: isMobile ? "72px 0" : "120px 0",
       }}
     >
       <div
         style={{
           maxWidth: "1200px",
           margin: "0 auto",
-          padding: "0 40px", // 👈 keep spacing here
+          padding: isMobile ? "0 24px" : "0 40px",
         }}
       >
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "60px",
+            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+            gap: isMobile ? "32px" : "60px",
             alignItems: "start",
           }}
         >
@@ -36,7 +49,7 @@ export default function BenefitsSection() {
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
                 marginBottom: "16px",
-                color: "#fff", // 👈 important for contrast
+                color: "#fff",
               }}
             >
               Beneficios
@@ -44,10 +57,11 @@ export default function BenefitsSection() {
 
             <h2
               style={{
-                fontSize: "42px",
-                lineHeight: "1.1",
+                fontSize: isMobile ? "48px" : "42px",
+                lineHeight: isMobile ? "0.98" : "1.1",
                 marginBottom: "24px",
                 color: "#fff",
+                maxWidth: isMobile ? "320px" : "none",
               }}
             >
               Diseñado para sentirse mejor
@@ -55,10 +69,11 @@ export default function BenefitsSection() {
 
             <p
               style={{
-                fontSize: "18px",
-                lineHeight: "1.7",
+                fontSize: isMobile ? "20px" : "18px",
+                lineHeight: isMobile ? "1.45" : "1.7",
                 color: "#eaf9fc",
                 margin: 0,
+                maxWidth: isMobile ? "320px" : "none",
               }}
             >
               Una propuesta pensada para hacer de la rutina diaria un momento
@@ -70,18 +85,18 @@ export default function BenefitsSection() {
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: "18px",
+              gap: isMobile ? "14px" : "18px",
             }}
           >
             {benefits.map((item) => (
               <div
                 key={item}
                 style={{
-                  padding: "20px 24px",
-                  borderRadius: "18px",
+                  padding: isMobile ? "18px 20px" : "20px 24px",
+                  borderRadius: isMobile ? "16px" : "18px",
                   background: "#ffffff",
-                  fontSize: "17px",
-                  lineHeight: "1.5",
+                  fontSize: isMobile ? "16px" : "17px",
+                  lineHeight: isMobile ? "1.45" : "1.5",
                   color: "#222",
                 }}
               >

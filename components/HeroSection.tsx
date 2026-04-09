@@ -12,7 +12,7 @@ export default function HeroSection() {
         color: "#fff",
 
         // 👇 background image
-        backgroundImage: "url('/frames/GV-Aloe-Toma1-V001_00000.jpg')",
+        backgroundImage: "url('/frames-desktop/GV-Aloe-Toma1-V001_00000.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
