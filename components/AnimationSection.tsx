@@ -20,10 +20,10 @@ export default function AnimationSection() {
     if (!context) return;
 
     const isMobile = window.innerWidth < 768;
-    const frameCount = isMobile ? 253 : 253;
+    const frameCount = 253;
 
     const framesFolder = isMobile ? "frames-mobile" : "frames-desktop";
-    const frameExtension = isMobile ? "jpg" : "jpg";
+    const frameExtension = "jpg";
 
     const currentFrame = (index: number) =>
       `/${framesFolder}/GV-Aloe-Toma1-V001_${String(index).padStart(5, "0")}.${frameExtension}`;
@@ -38,8 +38,8 @@ export default function AnimationSection() {
     }
 
     const drawCoverImage = (img: HTMLImageElement) => {
-      const canvasWidth = canvas.width;
-      const canvasHeight = canvas.height;
+      const canvasWidth = window.innerWidth;
+      const canvasHeight = window.innerHeight;
 
       const imageWidth = img.naturalWidth;
       const imageHeight = img.naturalHeight;
@@ -58,18 +58,28 @@ export default function AnimationSection() {
       const y = (canvasHeight - drawHeight) / 2;
 
       context.clearRect(0, 0, canvasWidth, canvasHeight);
+      context.imageSmoothingEnabled = true;
+      context.imageSmoothingQuality = "high";
       context.drawImage(img, x, y, drawWidth, drawHeight);
     };
 
     const render = () => {
       const img = images[Math.floor(imageSeq.frame)];
-      if (!img || !img.complete) return;
+      if (!img || !img.complete || !img.naturalWidth) return;
       drawCoverImage(img);
     };
 
     const setCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = window.devicePixelRatio || 1;
+
+      canvas.width = Math.round(window.innerWidth * dpr);
+      canvas.height = Math.round(window.innerHeight * dpr);
+
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+
       render();
     };
 
