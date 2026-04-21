@@ -13,6 +13,7 @@ export default function Header() {
         alignItems: "center",
         padding: "20px 40px",
         pointerEvents: "none",
+        background: "#fff",
       }}
     >
       {/* Logo */}
