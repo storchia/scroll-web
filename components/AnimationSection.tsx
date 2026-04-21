@@ -19,10 +19,8 @@ export default function AnimationSection() {
     const context = canvas.getContext("2d");
     if (!context) return;
 
-    const isMobile = window.innerWidth < 768;
     const frameCount = 253;
-
-    const framesFolder = isMobile ? "frames-mobile" : "frames-desktop";
+    const framesFolder = "frames-desktop";
     const frameExtension = "jpg";
 
     const currentFrame = (index: number) =>
@@ -48,7 +46,7 @@ export default function AnimationSection() {
 
       const scale = Math.max(
         canvasWidth / imageWidth,
-        canvasHeight / imageHeight,
+        canvasHeight / imageHeight
       );
 
       const drawWidth = imageWidth * scale;
@@ -97,7 +95,7 @@ export default function AnimationSection() {
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: isMobile ? "+=2200" : "+=3000",
+        end: "+=3000",
         scrub: true,
         pin: true,
         pinSpacing: true,
